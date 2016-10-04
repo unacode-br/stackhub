@@ -1,11 +1,23 @@
 # Stackhub Py
 
-Run a Docker container with the Python 3.5.2 image.
+## How to run it
 
-After clone the repo, run `sh setup.sh` and the following commands:
+Pull the Python image from Docker Hub:
 
-`$ source venv/bin/activate`
+`docker pull python:3.5.2`
 
-and
+Clone this repo. We will consider that your folder name is `unacode`.
 
-`$ pip install -r requirements.txt`
+Run the Docker container with this command:
+
+`$ docker run -it -v ~/unacode:/python python:3.5.2 bash`
+
+After, enter on the `python` folder at the root on container bash.
+
+Run the following commands:
+
+```
+$ sh setup.sh
+$ source venv/bin/activate
+$ pip install -r requirements.txt
+```
