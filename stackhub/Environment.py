@@ -7,8 +7,6 @@ class Environment(object):
     def __init__(self):
         path = os.path.join(os.path.dirname(__file__), '../.env')
 
-        print(path)
-
         load_dotenv(path)
 
     def get_env(self, key):
@@ -18,4 +16,3 @@ class Environment(object):
             return str()
 
         return env
-
