@@ -3,7 +3,7 @@ from stackhub.Database import Database
 
 sh = Stackhub()
 
-db = Database(database = 'local', host = sh.env('DOCKER_HOST'))
+db = Database(database = sh.env('MONGO_DATABASE'), host = sh.env('MONGO_HOST'))
 
 cursor = db.get().stackhub.find()
 
