@@ -1,5 +1,11 @@
 from stackhub.Stackhub import Stackhub
+from stackhub.Database import Database
 
 sh = Stackhub()
 
-print(sh.env("teste") + " " + sh.env("DOCKER_HOST"))
+db = Database(database = 'local', host = sh.env('DOCKER_HOST'))
+
+cursor = db.get().stackhub.find()
+
+for document in cursor:
+    print(document)
