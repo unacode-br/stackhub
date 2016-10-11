@@ -1,5 +1,6 @@
 from stackhub.Environment import Environment
 
+
 class Stackhub:
     def __init__(self):
         self.environ = Environment()
