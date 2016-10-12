@@ -19,8 +19,7 @@ Run the following commands:
 ```
 $ sh setup.sh
 $ source venv/bin/activate
-$ pip install -r requirements.txt
-$ pip install .
+$ sh configure.sh
 ```
 
 Run an example:
@@ -28,4 +27,3 @@ Run an example:
 `$ python example.py`
 
 If you exit the container and enter it again, make sure that you have run the source command.
-
