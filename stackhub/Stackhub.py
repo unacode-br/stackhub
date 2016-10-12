@@ -5,5 +5,5 @@ class Stackhub:
     def __init__(self):
         self.environ = Environment()
 
-    def env(self, key):
-        return self.environ.get_env(key)
+    def env(self, key, default=None):
+        return self.environ.get_env(key, default)
