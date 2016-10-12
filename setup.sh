@@ -3,4 +3,9 @@
 pip install virtualenv
 virtualenv venv
 
-cp .env.example .env
+if [ ! -f ".env" ];
+then
+  cp .env.example .env
+else
+  echo "The .env file already exists."
+fi
