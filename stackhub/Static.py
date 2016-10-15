@@ -39,3 +39,6 @@ class TrendItem(object):
         self.language = language
         self.stars = stars
         self.forks = forks
+
+    def get_dict(self):
+        return { 'repository': self.repository, 'language': self.language, 'stars': self.stars, 'forks': self.forks }
