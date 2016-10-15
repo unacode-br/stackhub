@@ -29,7 +29,7 @@ class Trend(object):
             stars = int(info[0 if len(info) == 2 else 1].replace(',', ''))
             forks = int(info[1 if len(info) == 2 else 2].replace(',', ''))
 
-            components.append(TrendItem(repository, language, stars, forks))
+            components.append(TrendItem(repository, language, stars, forks).get_dict())
 
         return components
 
