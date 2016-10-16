@@ -1,5 +1,5 @@
 from bs4 import BeautifulSoup
-from pymongo import common, MongoClient
+from pymongo import MongoClient
 
 import requests
 
