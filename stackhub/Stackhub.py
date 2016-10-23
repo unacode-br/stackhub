@@ -17,9 +17,10 @@ class Stackhub:
         """
         trends = Trend().load()
 
-        # Truncate the github_trends collection.
-        self.db.get_collection('github_trends').delete_many({})
+        if len(trends) > 0:
+            # Truncate the github_trends collection.
+            self.db.get_collection('github_trends').delete_many({})
 
-        self.db.get_collection('github_trends').insert_many(trends)
+            self.db.get_collection('github_trends').insert_many(trends)
 
         return trends
