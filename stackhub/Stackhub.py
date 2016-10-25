@@ -2,6 +2,7 @@ from stackhub.Database import Database
 from stackhub.Environment import Environment
 from stackhub.Static import Trend
 
+
 class Stackhub:
     def __init__(self):
         self.environ = Environment()
