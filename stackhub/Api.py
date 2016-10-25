@@ -29,7 +29,7 @@ class Github(Api):
         languages = []
 
         try:
-            repositories = self.provider.get_repos()[:10]
+            repositories = self.provider.get_repos()
 
             for repository in repositories:
                 _languages = repository.get_languages()
