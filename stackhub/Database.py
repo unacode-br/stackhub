@@ -1,14 +1,18 @@
 from pymongo import MongoClient
+from pymongo.errors import ConnectionFailure, ServerSelectionTimeoutError
+
 from stackhub.Environment import Environment
 
 
 class Database(object):
-    def __init__(self, database, host=None, port=None, document_class=dict):
-        self.connection = MongoClient(
-            host = host,
-            port = port,
-            document_class = document_class
-        )
+    def __init__(self, uri, database):
+        if ':@' in uri:
+            uri = uri.replace(':@', '')
+
+        try:
+            self.connection = MongoClient(uri)
+        except (ConnectionFailure, ServerSelectionTimeoutError) as err:
+            print('An error occurred trying to connect to MongoDB: {0}'.format(err))
 
         self.database = database
 

@@ -7,7 +7,13 @@ class Stackhub:
     def __init__(self):
         self.environ = Environment()
 
-        self.db = Database(database = self.env('MONGO_DATABASE'), host = self.env('MONGO_HOST')).get()
+        _db = Database(self.env('MONGO_URI'), self.env('MONGO_DATABASE')).get()
+
+        self._db = _db
+
+    @property
+    def db(self):
+        return self._db
 
     def env(self, key, default=None):
         return self.environ.get_env(key, default)
