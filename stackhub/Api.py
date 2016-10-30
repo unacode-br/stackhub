@@ -37,7 +37,7 @@ class Github(Api):
                 _languages = repository.get_languages()
 
                 for language in _languages:
-                    index = Helper.find_in_list(languages, 'language', language)
+                    index = Helper.find_in_list(languages, 'language', str(language).lower())
 
                     if index is None:
                         languages.append({
@@ -54,7 +54,7 @@ class Github(Api):
             print('Connection timeout. Try again later.')
 
         except Exception as err:
-            print('An unknow error was throwed: {0}'.format(e))
+            print('An unknow error was throwed: {0}'.format(err))
 
         return languages
 
