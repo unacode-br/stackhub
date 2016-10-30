@@ -17,21 +17,26 @@ def date_to_unix(dt):
     """
     return time.mktime(datetime.strptime(dt, '%Y-%m-%d').timetuple())
 
-def learning_curve(z, n, curve, counter=5):
+def learning_curve(z, n, index, counter=5):
     """
-    Calculate the learning curve five times.
+    Calculate the learning curve.
     """
     _counter = 1
+    _index = index
 
-    data = []
+    x = 1
+
+    data = [ { 'y': 1, 'x': x, 'value': z } ]
 
     while _counter <= counter:
+        x *= 2
+
         if _counter > 1:
-            curve = curve - (curve * 0.016)
+            _index *= index
 
-        lc = z * (math.pow(curve, math.log(n, 2)))
+        lc = z * (math.pow(_index, math.log(n, 2)))
 
-        data.append(lc)
+        data.append({ 'y': _index, 'x': x, 'value': lc })
 
         _counter += 1
 
