@@ -25,7 +25,7 @@ class Github(Api):
     def __init__(self, token):
         Api.__init__(self, token)
 
-        Api.provider = github.Github(login_or_token=self.token[0], per_page=100)
+        self._api = github.Github(login_or_token=self.token[0], per_page=100)
 
     def get_languages_from_repos(self, query, sort=github.GithubObject.NotSet, order=github.GithubObject.NotSet):
         languages = []
@@ -63,7 +63,7 @@ class Stackoverflow(Api):
     def __init__(self, token):
         Api.__init__(self, token)
 
-        Api.provider = stackexchange.Site(stackexchange.StackOverflow, self.token[0])
+        self._api = stackexchange.Site(stackexchange.StackOverflow, self.token[0])
 
     def get_tags_from_repos(self, from_date, to_date, order='desc', sort='votes'):
         tags = []
