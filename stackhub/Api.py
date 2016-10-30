@@ -53,7 +53,7 @@ class Github(Api):
         except socket.timeout:
             print('Connection timeout. Try again later.')
 
-        except github.GithubException.UnknownObjectException as err:
+        except Exception as err:
             print('An unknow error was throwed: {0}'.format(e))
 
         return languages
