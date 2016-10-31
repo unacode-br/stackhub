@@ -4,6 +4,11 @@ from stackhub import Api
 
 sh = Stackhub()
 
+# Load Github Trends to MongoDB.
+trends = sh.github_trends()
+
+print(str(len(trends)) + ' lines included from Github Trends.')
+
 github_api = Api.Github(sh.env('GITHUB_TOKEN'))
 stackoverflow_api = Api.Stackoverflow(sh.env('STACKAPP_KEY'))
 
