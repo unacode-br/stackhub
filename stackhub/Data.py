@@ -2,6 +2,7 @@ from stackhub import Helper
 
 from pymongo.database import Database
 
+
 class LearningCurveObject(object):
     def __init__(self, language, tag):
         self._language = language
