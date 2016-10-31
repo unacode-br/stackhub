@@ -4,12 +4,21 @@ Stackhub importer.
 Use this script to import the JSON data to MongoDB.
 
 Arguments:
-    - load: str
-        Accepted methods.
+    -l | --load: str - required
+        Accepted methods: `github`, `stackoverflow`, `learning_curve` and `trends`.
+    -t | --truncate: bool - optional - default
+        Delete all the documents from MongoDB collections.
+    -nt | --not-truncate: bool - optional
+        Do not delete the documents from MongoDB collections.
 
 Usage:
-    python importer.py "github stackoverflow"
-        This will import data from Github and Stackoverflow.
+    python importer.py -l "github stackoverflow"
+        This will import data from Github and Stackoverflow and truncate all
+        the documents from these collections.
+
+    python importer.py -l trends -nt
+        This will import data from Github Trends and DO NOT truncate the
+        documents.
 """
 import sys
 import json
