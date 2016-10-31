@@ -19,8 +19,8 @@ from stackhub.Stackhub import Stackhub
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-l', '--load', help='The collections aliases to import to MongoDB.', type=str, required=True)
-parser.add_argument('-t', '--truncate', help='Delete old documents?', dest='truncate', action='store_true', required=False)
-parser.add_argument('-nt', '--not-truncate', help='Delete old documents?', dest='truncate', action='store_false', required=False)
+parser.add_argument('-t', '--truncate', help='Delete all the collection documents.', dest='truncate', action='store_true', required=False)
+parser.add_argument('-nt', '--not-truncate', help='Do not delete the collection documents.', dest='truncate', action='store_false', required=False)
 parser.set_defaults(truncate=True)
 args = parser.parse_args()
 
