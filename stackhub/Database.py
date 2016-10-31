@@ -16,5 +16,8 @@ class Database(object):
 
         self.database = database
 
+    def __exit__(self, *args):
+        self.connection.close()
+
     def get(self):
         return self.connection.get_database(self.database)
