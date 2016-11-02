@@ -44,12 +44,18 @@ class Github(Api):
                             'language': str(language).lower(),
                             'language_original': language,
                             'counter': 1,
-                            'repositories': [ repository.full_name ]
+                            'repositories': [{
+                                'full_name': repository.full_name,
+                                'created_at': repository.created_at
+                            }]
                         })
 
                     if index is not None:
                         languages[index]['counter'] += 1
-                        languages[index]['repositories'].append(repository.full_name)
+                        languages[index]['repositories'].append({
+                            'full_name': repository.full_name,
+                            'created_at': repository.created_at
+                        })
         except socket.timeout:
             print('Connection timeout. Try again later.')
 
@@ -84,12 +90,18 @@ class Stackoverflow(Api):
                         'tag': str(tag).lower(),
                         'counter': 1,
                         'score': question.score,
-                        'questions': [ question.id ]
+                        'questions': [{
+                            'id': question.id,
+                            'created_at': question.creation_date
+                        }]
                     })
 
                 if index is not None:
                     tags[index]['counter'] += 1
                     tags[index]['score'] += question.score
-                    tags[index]['questions'].append(question.id)
+                    tags[index]['questions'].append({
+                        'id': question.id,
+                        'created_at': question.creation_date
+                    })
 
         return tags
