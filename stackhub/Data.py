@@ -2,6 +2,9 @@ from stackhub import Helper
 
 from pymongo.database import Database
 
+import math
+import functools
+
 
 class LearningCurveObject(object):
     def __init__(self, language, tag):
@@ -104,3 +107,42 @@ class LearningCurve(object):
                 self.add(LearningCurveObject(language=language, tag=tag))
 
         return self
+
+    @staticmethod
+    def y_function(points, num):
+        # Number of points.
+        n = len(points)
+
+        # X axis.
+        x = list(map(lambda point: point['x'], points))
+        # Y axis.
+        y = list(map(lambda point: point['value'], points))
+
+        # Sum of X axis.
+        sum_x = functools.reduce(lambda a, b: a + b, x)
+        # Sum of Y axis.
+        sum_y = functools.reduce(lambda a, b: a + b, y)
+
+        # Sum of x * y (per unit).
+        e_xy = functools.reduce(lambda a, b: a + b, [_a * _b for _a, _b in zip(x, y)])
+
+        # X average.
+        avg_x = sum_x / n
+        # Y average.
+        avg_y = sum_y / n
+
+        # Sum of x high 2 (per unit).
+        pow_x = functools.reduce(lambda a, b: a + b, [math.pow(_x, 2) for _x in x])
+        # Sum of x high 2.
+        pow_x_sum = math.pow(sum_x, 2)
+
+        # B formula.
+        b = (n * e_xy - sum_x * sum_y) / (n * pow_x - pow_x_sum)
+
+        # A formula.
+        a = avg_y - b * avg_x
+
+        # Y function.
+        _y = a + b * num
+
+        return _y
