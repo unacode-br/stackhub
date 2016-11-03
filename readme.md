@@ -41,6 +41,7 @@ The `-l|--load` argument must contain a string with the methods who will be run.
 * github
 * stackoverflow
 * learning_curve
+* lc_lang
 * trends
 
 e.g.:
