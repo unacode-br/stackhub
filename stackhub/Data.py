@@ -108,41 +108,152 @@ class LearningCurve(object):
 
         return self
 
-    @staticmethod
-    def y_function(points, num):
+
+class Math(object):
+    """
+    Examples:
+    x = [1, 2, 3, 4 [, ...]]
+    y = [2, 4, 6, 8 [, ...]]
+
+    n = 6
+
+    b = (n * sum(x * y) - sum(x) * sum(y)) / (n * sum(x ^ 2) - sum(x) ^ 2)
+
+    avg_y = sum(y) / n
+    avg_x = sum(x) / n
+
+    a = avg_y - b * avg_x
+    """
+    def __init__(self, points, num):
+        self._points = points
+        self._num = num
+
+        self._n = 0
+        self._x = 0
+        self._y = 0
+        self._avg_x = 0
+        self._avg_y = 0
+        self._sum_x = 0
+        self._sum_y = 0
+        self._pow_x = 0
+        self._pow_y = 0
+        self._sum_pow_x = 0
+        self._sum_pow_y = 0
+        self._sum_xy = 0
+        self._b = 0
+        self._a = 0
+
+    @property
+    def points(self):
+        return self._points
+
+    @property
+    def num(self):
+        return self._num
+
+    @property
+    def x(self):
+        return self._x
+
+    @property
+    def y(self):
+        return self._y
+
+    @property
+    def n(self):
+        return self._n
+
+    @property
+    def avg_x(self):
+        return self._avg_x
+
+    @property
+    def avg_y(self):
+        return self._avg_y
+
+    @property
+    def sum_x(self):
+        return self._sum_x
+
+    @property
+    def sum_y(self):
+        return self._sum_y
+
+    @property
+    def pow_x(self):
+        return self._pow_x
+
+    @property
+    def pow_y(self):
+        return self._pow_y
+
+    @property
+    def sum_pow_x(self):
+        return self._sum_pow_x
+
+    @property
+    def sum_pow_y(self):
+        return self._sum_pow_y
+
+    @property
+    def sum_xy(self):
+        return self._sum_xy
+
+    @property
+    def b(self):
+        return self._b
+
+    @property
+    def a(self):
+        return self._a
+
+    def y_function(self):
+        """
+        Calculate the Y function.
+
+        y = a + b * x
+        """
         # Number of points.
-        n = len(points)
+        self._n = len(self.points)
 
         # X axis.
-        x = list(map(lambda point: point['x'], points))
+        self._x = list(map(lambda point: point['x'], self.points))
         # Y axis.
-        y = list(map(lambda point: point['value'], points))
+        self._y = list(map(lambda point: point['value'], self.points))
 
         # Sum of X axis.
-        sum_x = functools.reduce(lambda a, b: a + b, x)
+        self._sum_x = functools.reduce(lambda a, b: a + b, self.x)
         # Sum of Y axis.
-        sum_y = functools.reduce(lambda a, b: a + b, y)
+        self._sum_y = functools.reduce(lambda a, b: a + b, self.y)
 
         # Sum of x * y (per unit).
-        e_xy = functools.reduce(lambda a, b: a + b, [_a * _b for _a, _b in zip(x, y)])
+        self._sum_xy = functools.reduce(lambda a, b: a + b, [_a * _b for _a, _b in zip(self.x, self.y)])
 
         # X average.
-        avg_x = sum_x / n
+        self._avg_x = self.sum_x / self.n
         # Y average.
-        avg_y = sum_y / n
+        self._avg_y = self.sum_y / self.n
 
         # Sum of x high 2 (per unit).
-        pow_x = functools.reduce(lambda a, b: a + b, [math.pow(_x, 2) for _x in x])
+        self._pow_x = functools.reduce(lambda a, b: a + b, [math.pow(_x, 2) for _x in self.x])
         # Sum of x high 2.
-        pow_x_sum = math.pow(sum_x, 2)
+        self._sum_pow_x = math.pow(self.sum_x, 2)
 
         # B formula.
-        b = (n * e_xy - sum_x * sum_y) / (n * pow_x - pow_x_sum)
+        self._b = (n * self.sum_xy - self.sum_x * self.sum_y) / (self.n * self.pow_x - self.sum_pow_x)
 
         # A formula.
-        a = avg_y - b * avg_x
+        self._a = self.avg_y - self.b * self.avg_x
 
         # Y function.
-        _y = a + b * num
+        _y = self.a + self.b * self.num
 
         return _y
+
+    def r_function(self):
+        """
+        Calculate de R function.
+
+        r = (n * sum(x * y) - sum(x) * sum(y)) / sqrt((n * sum(x ^ 2) - sum(x) ^ 2) * (n * sum(y ^ 2) - sum(y) ^ 2))
+        """
+        pass
