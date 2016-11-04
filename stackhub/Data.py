@@ -240,7 +240,7 @@ class Math(object):
         self._sum_pow_x = math.pow(self.sum_x, 2)
 
         # B formula.
-        self._b = (n * self.sum_xy - self.sum_x * self.sum_y) / (self.n * self.pow_x - self.sum_pow_x)
+        self._b = (self.n * self.sum_xy - self.sum_x * self.sum_y) / (self.n * self.pow_x - self.sum_pow_x)
 
         # A formula.
         self._a = self.avg_y - self.b * self.avg_x
@@ -256,4 +256,17 @@ class Math(object):
 
         r = (n * sum(x * y) - sum(x) * sum(y)) / sqrt((n * sum(x ^ 2) - sum(x) ^ 2) * (n * sum(y ^ 2) - sum(y) ^ 2))
         """
-        pass
+        if self.n == 0 or self.sum_x == 0 or self.sum_y == 0:
+            raise Exception('Values undefined.')
+
+        # Sum of y high 2 (per unit).
+        self._pow_y = functools.reduce(lambda a, b: a + b, [math.pow(_y, 2) for _y in self.y])
+
+        # Sum of y high 2.
+        self._sum_pow_y = math.pow(self.sum_y, 2)
+
+        r = (self.n * self.sum_xy - self.sum_x * self.sum_y) / math.sqrt(
+                (self.n * self.pow_x - self.sum_pow_x) * (self.n * self.pow_y - self.sum_pow_y)
+            )
+
+        return r
