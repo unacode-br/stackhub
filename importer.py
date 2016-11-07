@@ -37,15 +37,9 @@ accepted = ('github', 'stackoverflow', 'learning_curve', 'lc_lang', 'trends')
 
 _loads = str(args.load).split(' ')
 
-founds_cnt = 0
-loads = []
+loads = list(set(accepted).intersection([_l.strip() for _l in _loads]))
 
-for load in _loads:
-    if load.strip() in accepted:
-        founds_cnt += 1
-        loads.append(load.strip())
-
-if founds_cnt == 0:
+if len(loads) == 0:
     print('No method was accepted.')
     raise SystemExit
 
