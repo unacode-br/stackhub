@@ -67,7 +67,7 @@ files = {
     'github': path.join(script_dir, 'data/github.json'),
     'stackoverflow': path.join(script_dir, 'data/stackoverflow.json'),
     'learning_curve': path.join(script_dir, 'data/learning_curve.json'),
-    'trends': path.join(script_dir, 'data/trends.json')
+    'trends': path.join(script_dir, 'data/trends.json'),
     'lc_lang': path.join(script_dir, 'data/lc_lang.json')
 }
 
