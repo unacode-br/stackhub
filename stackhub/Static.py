@@ -16,18 +16,18 @@ class Trend(object):
         components = []
 
         for item in items:
-            info = list(filter(None, item.div.get_text().split('\n')))
-            info = list(filter(None, [i.strip() for i in info]))
-
             repository = ''.join(list(filter(None, [x.strip() for x in item.h3.text.split('\n')])))
+
+            info = item.find_all(class_='mr-3')
 
             if len(info) == 2:
                 language = None
             else:
-                language = info[0]
+                language = info[0].get_text().strip()
 
-            stars = int(info[0 if len(info) == 2 else 1].replace(',', ''))
-            forks = int(info[1 if len(info) == 2 else 2].replace(',', ''))
+            stars = int(info[0 if len(info) == 2 else 1].get_text().strip().replace(',', ''))
+
+            forks = int(info[1 if len(info) == 2 else 2].get_text().strip().replace(',', ''))
 
             components.append(TrendItem(repository, language, stars, forks).get_dict())
 
