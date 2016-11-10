@@ -105,3 +105,8 @@ class Stackoverflow(Api):
                     })
 
         return tags
+
+    def get_tags_from_radar(self, from_date, to_date, order='desc', sort='votes'):
+        tags = []
+
+        return tags
