@@ -23,7 +23,12 @@ github_data = github_api.get_languages_from_repos('your query here')
 # Advanced search from Stack Exchange API - https://api.stackexchange.com/docs/advanced-search
 stackoverflow_data = stackoverflow_api.get_tags_from_repos('2016-01-01', '2016-01-30')
 
-# Add your github_data and stackoverflow_data to MongoDB here.
+# Tag info from Stack Exchange API - https://api.stackexchange.com/docs/tags-by-name
+technologies = sh.db.get_collection('thoughtworks_radar').find({}, { '_id': 0 })
+
+radar = stackoverflow_api.get_tag_points_from_radar(technologies)
+
+# Add your github_data, stackoverflow_data and radar to MongoDB here.
 
 learning_curve = LearningCurve(sh.db).process()
 
