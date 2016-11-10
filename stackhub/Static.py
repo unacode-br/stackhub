@@ -56,14 +56,19 @@ class Radar(object):
 
         techs = []
 
+        seq = 1
+
         for item in items:
             name = str(item.find(class_='blip-name').get_text().strip())
 
             slug = re.sub(r'(?i)\s+(and|or|of)+\s?', '-', name.lower()).replace(' ', '-')
 
             techs.append({
+                'sequence': seq,
                 'slug': slug,
                 'name': name
             })
+
+            seq += 1
 
         return techs
