@@ -1,6 +1,6 @@
 from stackhub.Database import Database
 from stackhub.Environment import Environment
-from stackhub.Static import Trend
+from stackhub.Static import Trend, Radar
 
 
 class Stackhub:
@@ -31,3 +31,17 @@ class Stackhub:
             self.db.get_collection('github_trends').insert_many(trends)
 
         return trends
+
+    def thoughtworks_radar(self):
+        """
+        Return and save the ThoughtWorks Radar data into MongoDB.
+        """
+        radar = Radar().load()
+
+        if len(radar) > 0:
+            # Truncate the thoughtworks_radar collection.
+            self.db.get_collection('thoughtworks_radar').delete_many({})
+
+            self.db.get_collection('thoughtworks_radar').insert_many(radar)
+
+        return radar

@@ -9,6 +9,11 @@ trends = sh.github_trends()
 
 print(str(len(trends)) + ' lines included from Github Trends.')
 
+# Load ThoughtWorks Radar to MongoDB.
+radar = sh.thoughtworks_radar()
+
+print(str(len(radar)) + ' lines included from ThoughtWorks Radar.')
+
 github_api = Api.Github(sh.env('GITHUB_TOKEN'))
 stackoverflow_api = Api.Stackoverflow(sh.env('STACKAPP_KEY'))
 

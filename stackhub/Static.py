@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 from pymongo import MongoClient
 
+import re
 import requests
 
 
@@ -42,3 +43,24 @@ class TrendItem(object):
 
     def get_dict(self):
         return { 'repository': self.repository, 'language': self.language, 'stars': self.stars, 'forks': self.forks }
+
+
+class Radar(object):
+    THOUGHTWORKS_URL = 'https://www.thoughtworks.com/pt/radar/languages-and-frameworks'
+
+    def load(object):
+        r = requests.get(Radar.THOUGHTWORKS_URL)
+        soup = BeautifulSoup(r.text, 'html.parser')
+
+        items = soup.find(id='responsive-tech-radar').find('div', class_='languages-and-frameworks').find_all('li')
+
+        techs = []
+
+        for item in items:
+            tech = str(item.find(class_='blip-name').get_text().strip()).lower()
+
+            tech = re.sub(r'(?i)\s+(and|or|of)+\s?', '-', tech).replace(' ', '-')
+
+            techs.append({ 'tech': tech })
+
+        return techs
