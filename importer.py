@@ -52,7 +52,7 @@ collections = {
     'stackoverflow': db.get_collection('stackoverflow_data'),
     'learning_curve': db.get_collection('learning_curve'),
     'trends': db.get_collection('github_trends'),
-    'lc_lang': db.get_collection('learning_curve_lang')
+    'lc_lang': db.get_collection('learning_curve_all')
 }
 
 script_dir = path.dirname(path.abspath(__file__))
