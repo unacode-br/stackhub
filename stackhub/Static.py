@@ -72,3 +72,30 @@ class Radar(object):
             seq += 1
 
         return techs
+
+
+class Tiobe(object):
+    TIOBE_URL = 'http://www.tiobe.com/tiobe-index'
+
+    def load(object):
+        r = requests.get(Tiobe.TIOBE_URL)
+        soup = BeautifulSoup(r.text, 'html.parser')
+
+        items = soup.find('table', class_='table-top20').find('tbody').find_all('tr')
+
+        languages = []
+
+        for item in items:
+            tds = item.find_all('td')
+
+            index = int(tds[0].get_text())
+            language = tds[3].get_text()
+            rating = float(tds[4].get_text().replace('%', '')) / 100
+
+            languages.append({
+                'sequence': index,
+                'language': language,
+                'rating': rating
+            })
+
+        return languages

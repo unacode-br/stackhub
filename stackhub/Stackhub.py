@@ -1,6 +1,6 @@
 from stackhub.Database import Database
 from stackhub.Environment import Environment
-from stackhub.Static import Trend, Radar
+from stackhub.Static import Trend, Radar, Tiobe
 
 
 class Stackhub:
@@ -45,3 +45,17 @@ class Stackhub:
             self.db.get_collection('thoughtworks_radar').insert_many(radar)
 
         return radar
+
+    def tiobe_index(self):
+        """
+        Return and save the TIOBE Index data into MongoDB.
+        """
+        tiobe = Tiobe().load()
+
+        if len(tiobe) > 0:
+            # Truncate the thoughtworks_radar collection.
+            self.db.get_collection('tiobe_index').delete_many({})
+
+            self.db.get_collection('tiobe_index').insert_many(tiobe)
+
+        return tiobe

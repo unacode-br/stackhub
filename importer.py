@@ -33,7 +33,7 @@ parser.add_argument('-nt', '--not-truncate', help='Do not delete the collection 
 parser.set_defaults(truncate=True)
 args = parser.parse_args()
 
-accepted = ('github', 'stackoverflow', 'learning_curve', 'lc_lang', 'trends', 'radar')
+accepted = ('github', 'stackoverflow', 'learning_curve', 'lc_lang', 'trends', 'radar', 'tiobe')
 
 _loads = str(args.load).split(' ')
 
@@ -54,6 +54,7 @@ collections = {
     'trends': db.get_collection('github_trends'),
     'lc_lang': db.get_collection('learning_curve_all'),
     'radar': db.get_collection('thoughtworks_radar'),
+    'tiobe': db.get_collection('tiobe_index')
 }
 
 script_dir = path.dirname(path.abspath(__file__))
@@ -64,7 +65,8 @@ files = {
     'learning_curve': path.join(script_dir, 'data/learning_curve.json'),
     'trends': path.join(script_dir, 'data/trends.json'),
     'lc_lang': path.join(script_dir, 'data/lc_lang.json'),
-    'radar': path.join(script_dir, 'data/radar.json')
+    'radar': path.join(script_dir, 'data/radar.json'),
+    'tiobe': path.join(script_dir, 'data/tiobe.json')
 }
 
 for method in loads:

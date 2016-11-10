@@ -43,6 +43,8 @@ The `-l|--load` argument must contain a string with the methods who will be run.
 * learning_curve
 * lc_lang
 * trends
+* radar
+* tiobe
 
 e.g.:
 

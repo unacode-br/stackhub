@@ -14,6 +14,11 @@ radar = sh.thoughtworks_radar()
 
 print(str(len(radar)) + ' lines included from ThoughtWorks Radar.')
 
+# Load TIOBE Index to MongoDB.
+tiobe = sh.tiobe_index()
+
+print(str(len(tiobe)) + ' lines included from TIOBE Index.')
+
 github_api = Api.Github(sh.env('GITHUB_TOKEN'))
 stackoverflow_api = Api.Stackoverflow(sh.env('STACKAPP_KEY'))
 
