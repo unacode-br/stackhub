@@ -112,10 +112,10 @@ class LearningCurve(object):
 class Math(object):
     """
     Examples:
-    x = [1, 2, 3, 4 [, ...]]
-    y = [2, 4, 6, 8 [, ...]]
+    x = [1, 2, 3, 4 [, ...]] accumulated binary base
+    y = [2, 4, 6, 8 [, ...]] learning curve points result
 
-    n = 6
+    n = length(points)
 
     b = (n * sum(x * y) - sum(x) * sum(y)) / (n * sum(x ^ 2) - sum(x) ^ 2)
 
