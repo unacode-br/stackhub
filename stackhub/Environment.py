@@ -7,7 +7,8 @@ class Environment(object):
     def __init__(self):
         path = os.path.join(os.path.dirname(__file__), '../.env')
 
-        load_dotenv(path)
+        if os.path.exists(path):
+            load_dotenv(path)
 
     def get_env(self, key, default=None):
         env = os.environ.get(key)
